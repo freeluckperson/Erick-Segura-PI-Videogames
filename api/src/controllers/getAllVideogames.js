@@ -36,7 +36,7 @@ const getAllDbVideogames = async () => {
 
 const getAllApiVideogames = async () => {
   try {
-    //const { data } = await axios(`https://api.rawg.io/api/games?key=${APIKEY}&page_size=20`);
+    //const { data } = await axios(`https://api.rawg.io/api/games?key=${APIKEY}&page_size=100`);
     const { data } = await axios(URL_MOCK);
     const api = data.results;
 
