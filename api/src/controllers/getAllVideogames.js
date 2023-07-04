@@ -54,6 +54,7 @@ const getAllApiVideogames = async () => {
   } catch (error) {
     throw new Error(error.message);
   }
+  
 };
 
 module.exports = getAllVideogames;

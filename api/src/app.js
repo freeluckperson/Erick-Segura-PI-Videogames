@@ -26,7 +26,8 @@ require(`./controllers/getAllVideogames.js`)
 
 
 server.use(`/videogames`, require(`./routes/videogames.js`));
-//server.use('/videogames', (req, res)=>{ res.send(`HOLA MUNDO`)});
+server.use(`/genres`, require(`./routes/genres.js`));
+
 
 // Error catching endware.
 server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
