@@ -3,6 +3,7 @@ const videogamesRouter = require("express").Router();
 const getAllVideogames = require(`../controllers/getAllVideogames`);
 const getVideogamesById = require(`../controllers/getVideogameById`);
 const getVideogamesByName = require(`../controllers/getVideogamesByName`);
+const createVideogame = require(`../controllers/createVideogame`);
 
 videogamesRouter.get("/", async (req, res) => {
   try {
@@ -24,6 +25,27 @@ videogamesRouter.get("/:id", async (req, res) => {
     const { id } = req.params;
     const videogame = await getVideogamesById(id);
     res.status(200).json(videogame);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+/**--------------------------------------------------------------------*/
+videogamesRouter.post(`/`, async (req, res) => {
+  const newVideogame = req.body;
+  try {
+    const auxVideogame = await createVideogame(newVideogame);
+    const { id, name, image, rating, description, genres } = await getVideogamesById(
+      auxVideogame.videogame.id
+    );
+    res.status(200).json({
+      response: auxVideogame.created
+        ? {
+            message: `Videogame created successfully!`,
+            createdVideogame: { id, name, image, rating, description, genres },
+          }
+        : { message: `Videogame exists` },
+    });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }

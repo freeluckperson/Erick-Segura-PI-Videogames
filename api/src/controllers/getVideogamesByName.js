@@ -23,7 +23,14 @@ const getDbVideogamesByName = async (name) => {
           [Op.iLike]: `%${name}%`,
         },
       },
-      include: Genre,
+      //include: Genre,
+      include: {
+        model: Genre,
+        attributes: ["name"],
+        through: {
+          attributes: [],
+        },
+      },
     });
     const dbVideogames = auxVideogames.map((vg) => {
       return {
@@ -34,6 +41,7 @@ const getDbVideogamesByName = async (name) => {
         genres: vg.genres.map((genre) => genre.name),
       };
     });
+
     return dbVideogames;
   } catch (error) {
     throw Error(error.message);

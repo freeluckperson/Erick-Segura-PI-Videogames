@@ -4,7 +4,7 @@ const bodyParser = require(`body-parser`);
 const morgan = require(`morgan`);
 
 
-require(`./db.js`);
+
 
 const server = express();
 
@@ -22,7 +22,7 @@ server.use((req, res, next) => {
   next();
 });
 
-
+require(`./controllers/getAllVideogames.js`)
 
 
 server.use(`/videogames`, require(`./routes/videogames.js`));
