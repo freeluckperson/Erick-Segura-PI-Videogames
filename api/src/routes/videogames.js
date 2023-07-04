@@ -30,7 +30,7 @@ videogamesRouter.get("/:id", async (req, res) => {
   }
 });
 
-/**--------------------------------------------------------------------*/
+
 videogamesRouter.post(`/`, async (req, res) => {
   const newVideogame = req.body;
   try {
