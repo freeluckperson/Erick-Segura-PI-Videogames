@@ -1,7 +1,6 @@
 import React from 'react';
-//import styles from './LandingPage.css';
 import styles from './LandingPage.module.css';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom'
 
 const st = {fontSize: '3em'};
 
