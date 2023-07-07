@@ -1,10 +1,14 @@
-import React from 'react'
+import styles from './Card.module.css'
 
-const Card = () => {
+const Card = (props) => {
+  const { name, image, genres } = props;
   return (
-    <div>
-      <h2>Componente Card</h2>
-      //debo mostrat img name y genre
+    <div className={styles.container}>
+      <ul>
+        <li>name:{name}</li>
+        <li>image:{image}</li>
+        <li>genres:{genres}</li>
+      </ul>
     </div>
   );
 };
