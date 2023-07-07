@@ -23,7 +23,7 @@ module.exports = (sequelize) => {
         //allowNull: false,
         defaultValue: ["PC"],
       },
-      image: {
+      imag: {
         type: DataTypes.STRING,
         allowNull: false,
       },

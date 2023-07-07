@@ -57,7 +57,7 @@ const searchOnDb = async (id) => {
       name: auxVideogame.name,
       description: auxVideogame.description,
       platforms: auxVideogame.platforms,
-      image: auxVideogame.image,
+      imag: auxVideogame.imag,
       released: auxVideogame.released,
       rating: auxVideogame.rating,
       genres: auxVideogame.genres.map(genre => genre.name),

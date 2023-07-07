@@ -24,7 +24,7 @@ const getAllDbVideogames = async () => {
       return {
         id: game.id,
         name: game.name,
-        image: game.image,
+        imag: game.imag,
         rating: game.rating,
         genres: game.genres.map((genre) => genre.name),
       };

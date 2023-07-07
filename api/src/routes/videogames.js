@@ -35,14 +35,14 @@ videogamesRouter.post(`/`, async (req, res) => {
   const newVideogame = req.body;
   try {
     const auxVideogame = await createVideogame(newVideogame);
-    const { id, name, image, rating, description, genres } = await getVideogamesById(
+    const { id, name, imag, rating, description, genres } = await getVideogamesById(
       auxVideogame.videogame.id
     );
     res.status(200).json({
       response: auxVideogame.created
         ? {
             message: `Videogame created successfully!`,
-            createdVideogame: { id, name, image, rating, description, genres },
+            createdVideogame: { id, name, imag, rating, description, genres },
           }
         : { message: `Videogame exists` },
     });

@@ -7,7 +7,7 @@ const createVideogame = async (newVideogame) => {
         name: newVideogame.name,
         description: newVideogame.description,
         platforms: newVideogame.platforms,
-        image: newVideogame.image,
+        imag: newVideogame.imag,
         released: newVideogame.released,
         rating: newVideogame.rating,
       }

@@ -36,7 +36,7 @@ const getDbVideogamesByName = async (name) => {
       return {
         id: vg.id,
         name: vg.name,
-        image: vg.image,
+        imag: vg.imag,
         rating: vg.rating,
         genres: vg.genres.name //map((genre) => genre.name),
       };
@@ -58,7 +58,7 @@ const getApiVideogamesByName = async (name) => {
       return {
         id: game.id,
         name: game.name,
-        image: game.background_image
+        imag: game.background_image
           ? game.background_image
           : "https://sm.ign.com/ign_es/screenshot/default/60225-metal-gear-solid-3-subsistence-playstation-2_umwf.jpg",
         rating: game.rating_top,
