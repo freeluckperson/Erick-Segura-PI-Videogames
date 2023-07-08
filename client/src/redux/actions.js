@@ -2,21 +2,15 @@ import axios from "axios";
 export const GET_ALLGAMES = "GET_ALLGAMES";
 export const GET_GAME = "GET_GAMES";
 
-
-
-const URL = `https://jsonplaceholder.typicode.com/users/`;
-const URL_API_DB = `http://localhost:3001/videogames/`;
-const UURL_API_DB = `/videogames/`;
+const URL = "http://localhost:3001/videogames/";
+const MOCKY = "https://run.mocky.io/v3/056a0c57-d0f3-4970-a938-2efa5e20fc98";
 
 export const getGames = () => {
   return async (dispatch) => {
-    const { data } = await axios(URL);
+    const { data } = await axios(MOCKY);
     dispatch({ type: GET_ALLGAMES, payload: data });
   };
 };
-
-
-
 
 // export const getGame = (id) => {
 //   return async (dispatch) => {

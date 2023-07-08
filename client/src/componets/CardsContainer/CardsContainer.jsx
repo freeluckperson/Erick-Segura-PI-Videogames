@@ -8,8 +8,8 @@ const CardsContainer = () => {
 
   return (
     <div className={styles.container}>
-      {games.map(({ name, id }) => (
-        <Card name={name} key={id} />
+      {games.map(({ id, name, imag, genres }) => (
+        <Card name={name} imag={imag} genres={genres} key={id} />
       ))}
     </div>
   );
