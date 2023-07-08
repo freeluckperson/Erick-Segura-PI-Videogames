@@ -7,7 +7,7 @@ const MOCKY = "https://run.mocky.io/v3/056a0c57-d0f3-4970-a938-2efa5e20fc98";
 
 export const getGames = () => {
   return async (dispatch) => {
-    const { data } = await axios(MOCKY);
+    const { data } = await axios(URL);
     dispatch({ type: GET_ALLGAMES, payload: data });
   };
 };

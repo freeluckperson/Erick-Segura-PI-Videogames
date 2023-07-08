@@ -26,7 +26,8 @@ const getAllDbVideogames = async () => {
         name: game.name,
         imag: game.imag,
         rating: game.rating,
-        genres: game.genres.map((genre) => genre.name),
+        genres: game.genres?.map((genre) => genre.name),
+        
       };
     });
   } catch (error) {
@@ -46,7 +47,7 @@ const getAllApiVideogames = async () => {
       released: game.released,
       rating: game.rating,
       imag: game.background_image,
-      genres: game.genres?.map((g) => g.name),
+      genres: game.genres?.map((genre) => genre.name),
       platforms: game.platforms?.map((p) => p.platform?.name),
     }));
 

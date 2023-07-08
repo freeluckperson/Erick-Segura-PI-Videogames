@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 
 const Form = () => {
@@ -27,13 +28,16 @@ const Form = () => {
     }
   };
 
-  const submitHandler = (event)=>{
-    event.preventDefault()
-    console.log(form)
-    alert('boton presionado')
-  }
+  const submitHandler = (event) => {
+    event.preventDefault();
+    // axios.post("http://localhost:3001/videogames/", form)
+    // .then(res => alert(res))
+    // .catch(err => alert(err))
+    //console.log(form);
+    
+  };
   return (
-    <form onSubmit={submitHandler} >
+    <form onSubmit={submitHandler}>
       <div>
         <label>Email: </label>
         <input type="text" value={form.email} onChange={handlerChange} name="email" />
