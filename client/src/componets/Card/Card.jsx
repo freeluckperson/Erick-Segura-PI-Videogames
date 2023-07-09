@@ -6,8 +6,9 @@ const Card = (props) => {
   return (
     <div className={styles.container}>
       <div className={styles.card}>
-        <img src={imag} />
         <h4>{name}</h4>
+        <img src={imag} />
+        <h6>GENRES: </h6>
         {genres.map(genre => ( <span>{genre}</span> ))}
       </div>
     </div>

@@ -15,11 +15,10 @@ const Home = () => {
 
   return (
     <div>
-      <h2>Soy el componente Home</h2>
+      <hr />
       <CardsContainer />
-      <Link to="/" className={styles.navLink}>
-        BACK
-      </Link>
+      <hr />
+      <Link to="/" className={styles.navLink}>BACK</Link>
     </div>
   );
 };
