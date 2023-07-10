@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom'
 
+
 //Componets
 import { Detail, Form, Home, LandingPage } from './componets/viewns'
 import { NavBar } from './componets'

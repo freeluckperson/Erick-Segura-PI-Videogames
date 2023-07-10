@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 
+
 const Form = () => {
   const [form, setForm] = useState({
     email: "",
@@ -37,7 +38,7 @@ const Form = () => {
     
   };
   return (
-    <form onSubmit={submitHandler}>
+    <form onSubmit={submitHandler} >
       <div>
         <label>Email: </label>
         <input type="text" value={form.email} onChange={handlerChange} name="email" />

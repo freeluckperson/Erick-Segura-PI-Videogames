@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
+
 
 const Detail = () => {
+
   return (
     <div>
       <h2>Soy el componente detail</h2>

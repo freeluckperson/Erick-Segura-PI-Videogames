@@ -15,9 +15,7 @@ const Home = () => {
 
   return (
     <div>
-      <hr />
       <CardsContainer />
-      <hr />
       <Link to="/" className={styles.navLink}>BACK</Link>
     </div>
   );
