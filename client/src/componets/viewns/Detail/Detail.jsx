@@ -1,30 +1,34 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import styles from "./Detail.module.css"
 import axios from "axios";
-
-const st = {width: '500px', height: '500px', borderRadius: '80%'}
+// marginLeft: '25em'
+const st = {width: '500px', height: '500px', borderRadius: '80%'};
 
 const Detail = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
   const [videoGame, setVideoGame] = useState({});
 
+
+
   useEffect(() => {
-    axios(`http://localhost:3001/videogames/${id}`).then(({ data }) => {
-      if (data.name) {
-        setVideoGame(data);
-      } else {
-        window.alert("No hay personajes con ese ID");
+    const fetchData = async () => {
+      try {
+        const { data } = await axios(`http://localhost:3001/videogames/${id}`);
+        data.name ? setVideoGame(data) : window.alert("No hay personajes con ese ID");
+      } catch (error) {
+        console.error(error);
       }
-    });
+    };
+    fetchData();
     return setVideoGame({});
   }, [id]);
 
-  const { name, imag, rating, platforms, released, description, genres } = videoGame;
+  const { name, imag, rating, platforms, released, description, genres, } = videoGame;
   
 
   return (
-    <div>
+    <div className={styles.container}>
       <img src={imag || videoGame.image} style={st}/>
       <h1>► ID | {videoGame.id}</h1>
       <h1>► NAME | {name}</h1>
@@ -38,3 +42,8 @@ const Detail = () => {
 };
 
 export default Detail;
+
+
+
+
+

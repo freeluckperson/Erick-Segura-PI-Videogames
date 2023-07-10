@@ -4,10 +4,8 @@ import {Link} from 'react-router-dom'
 
 const LandingPage = () => {
   return (
-    <div>
-      <Link to='/home' className={styles.navLink}>
-        To Home
-      </Link>
+    <div className={styles.container}>
+      <Link to='/home' className={styles.navLink}>To Home</Link>
     </div>
   );
 };
