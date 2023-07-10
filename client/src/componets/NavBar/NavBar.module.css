@@ -1,14 +1,9 @@
 .mainCotainer {
-  display: grid; 
-   grid-template-columns: repeat(4, auto); /*creates 3 columns of equal width */
-   justify-items: center; /*centers the items horizontally */
-   gap: 1rem;
-
+  /* display: grid;
+  grid-template-columns: repeat(4, auto); creates 3 columns of equal width
+  justify-items: center; centers the items horizontally
+  gap: 1rem; */
   margin-bottom: 3em;
-}
-
-.mainCotainer div {
-  margin-top: 1em;
 }
 
 .navLink {

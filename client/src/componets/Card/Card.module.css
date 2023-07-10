@@ -5,14 +5,20 @@
   /* grid-gap: 10px; */
 }
 
-.card {
-  /* background-color: rgb(116, 116, 238); */
-  background-color: rgb(24, 24, 24);
+.navLink {
+  color: khaki;
+  font-size: small;
+  max-width: 250px;
+  text-align: center;
+  display: grid;
+  place-items: center;
+}
 
+.card {
+  background-color: rgb(24, 24, 24);
   padding: 15px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  place-items: center;
   border: 1px solid black;
   border-radius: 5%;
 }
@@ -24,4 +30,5 @@
 
 .card h4 {
   max-width: 150px;
+  text-align: center;
 }
