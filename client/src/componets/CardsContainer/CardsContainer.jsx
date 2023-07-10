@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./CardsContainer.module.css";
 import Paginacion from "../Paginacion/Paginacion";
 import { Card } from "../";
-import { useState } from "react";
 import { useSelector } from "react-redux";
 
 const CardsContainer = () => {
@@ -27,22 +26,3 @@ const CardsContainer = () => {
 };
 
 export default CardsContainer;
-
-// import React from "react";
-// import { Card } from "../";
-// import styles from "./CardsContainer.module.css";
-// import { useSelector } from "react-redux";
-
-// const CardsContainer = () => {
-//   const games = useSelector((state) => state.videogames);
-
-//   return (
-//     <div className={styles.container}>
-//       {games.map(({ id, name, imag, genres }) => (
-//         <Card name={name} imag={imag} genres={genres} key={id} />
-//       ))}
-//     </div>
-//   );
-// };
-
-// export default CardsContainer;
