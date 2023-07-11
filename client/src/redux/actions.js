@@ -6,7 +6,6 @@ export const ORDER = "ORDER";
 
 const URL = "http://localhost:3001/videogames/";
 
-
 export const getGames = () => {
   return async (dispatch) => {
     const { data } = await axios(URL);
@@ -15,11 +14,12 @@ export const getGames = () => {
 };
 
 export const filterByGenres = (genres) => {
-  
   return { type: FILTER_GENRES, payload: genres };
 };
 
-
+export const orderByRating = (order) => {
+  return { type: ORDER, payload: order };
+};
 
 // export const getGame = (id) => {
 //   return async (dispatch) => {

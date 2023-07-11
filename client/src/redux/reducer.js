@@ -17,6 +17,20 @@ const rootReducer = (state = initialState, { type, payload }) => {
       let copy = state.videogames.filter(filterFunction);
       return { ...state, filterVideogames: copy };
 
+    case ORDER:
+      let copy2 = state.videogames;
+      let order = copy2.sort((a, b) => {
+        if (payload === "Mayor") {
+          return b.rating - a.rating;
+        } else if (payload === "Menor") {
+          return a.rating - b.rating;
+        } else {
+          return 0;
+        }
+      });
+
+      return { ...state, filterVideogames: order };
+
     default:
       return { ...state };
   }

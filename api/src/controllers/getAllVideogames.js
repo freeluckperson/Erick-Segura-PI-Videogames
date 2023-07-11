@@ -25,7 +25,7 @@ const getAllDbVideogames = async () => {
         id: game.id,
         name: game.name,
         imag: game.imag,
-        rating: game.rating,
+        rating: parseInt(game.rating),
         genres: game.genres?.map((genre) => genre.name),
         
       };
@@ -46,7 +46,7 @@ const getAllApiVideogames = async () => {
       id: game.id,
       name: game.name,
       released: game.released,
-      rating: game.rating,
+      rating: parseInt(game.rating),
       imag: game.background_image,
       genres: game.genres?.map((genre) => genre.name),
       platforms: game.platforms?.map((p) => p.platform?.name),
