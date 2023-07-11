@@ -3,7 +3,11 @@ import styles from "./CardsContainer.module.css";
 import Paginacion from "../Paginacion/Paginacion";
 import { Card } from "../";
 import { useDispatch, useSelector } from "react-redux";
-import { filterByGenres, orderByRating } from "../../redux/actions";
+import {
+  alphabetically,
+  filterByGenres,
+  orderByRating,
+} from "../../redux/actions";
 
 const CardsContainer = () => {
   const st = { width: "80px", marginBottom: "4em", marginRight: "1em" };
@@ -21,6 +25,11 @@ const CardsContainer = () => {
 
   const handlerOrder = (e) => {
     dispatch(orderByRating(e.target.value));
+    setAux(true);
+  };
+
+  const handlerAlpha = (e) => {
+    dispatch(alphabetically(e.target.value));
     setAux(true);
   };
 
@@ -51,7 +60,12 @@ const CardsContainer = () => {
         <span>RATING</span>
         <select onChange={handlerOrder} style={st}>
           <option value="Mayor">Mayor</option>
-          <option value="Menor">Menor</option>
+          <option value="Menor">Minor</option>
+        </select>
+        <span>A - Z</span>
+        <select onChange={handlerAlpha} style={st}>
+          <option value="A">A</option>
+          <option value="Z">Z</option>
         </select>
       </div>
       <div className={styles.container}>

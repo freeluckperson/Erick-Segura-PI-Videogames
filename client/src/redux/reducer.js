@@ -1,4 +1,4 @@
-import { GET_ALLGAMES, FILTER_GENRES, ORDER } from "./actions";
+import { GET_ALLGAMES, FILTER_GENRES, ORDER, ALPHABETH } from "./actions";
 
 const initialState = {
   videogames: [],
@@ -28,8 +28,20 @@ const rootReducer = (state = initialState, { type, payload }) => {
           return 0;
         }
       });
-
       return { ...state, filterVideogames: order };
+
+    case ALPHABETH:
+      let copy3 = state.videogames;
+      let alpha = copy3.sort((a, b) => {
+        if (payload === "A") {
+          return a.name.localeCompare(b.name);
+        } else if (payload === "Z") {
+          return b.name.localeCompare(a.name);
+        } else {
+          return 0;
+        }
+      });
+      return { ...state, filterVideogames: alpha };
 
     default:
       return { ...state };

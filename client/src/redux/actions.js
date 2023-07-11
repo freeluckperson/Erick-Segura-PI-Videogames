@@ -3,6 +3,7 @@ export const GET_ALLGAMES = "GET_ALLGAMES";
 export const GET_GAME = "GET_GAMES";
 export const FILTER_GENRES = "FILTER_GENRES";
 export const ORDER = "ORDER";
+export const ALPHABETH = "ALPHABETH";
 
 const URL = "http://localhost:3001/videogames/";
 
@@ -19,6 +20,10 @@ export const filterByGenres = (genres) => {
 
 export const orderByRating = (order) => {
   return { type: ORDER, payload: order };
+};
+
+export const alphabetically = (order) => {
+  return { type: ALPHABETH, payload: order };
 };
 
 // export const getGame = (id) => {
