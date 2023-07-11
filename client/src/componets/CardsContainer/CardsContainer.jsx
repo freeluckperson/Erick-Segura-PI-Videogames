@@ -2,17 +2,29 @@ import React, { useState } from "react";
 import styles from "./CardsContainer.module.css";
 import Paginacion from "../Paginacion/Paginacion";
 import { Card } from "../";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { filterByGenres } from "../../redux/actions";
 
 const CardsContainer = () => {
-  const games = useSelector((state) => state.videogames);
+  const dispatch = useDispatch();
+  const { filterVideogames: games } = useSelector((state) => state);
 
   const [pagina, setPagina] = useState(1);
   const [porPagina, setPorPagina] = useState(15);
   const maximo = games.length / porPagina;
 
+  const handlerFilter = (e) => {
+    dispatch(filterByGenres([e.target.value]));
+  };
+
   return (
     <div>
+      <select onChange={handlerFilter}>
+        <option value="RPG">RPG</option>
+        <option value="Shooter">Shooter</option>
+        <option value="Puzzle">Puzzle</option>
+      </select>
+
       <div className={styles.container}>
         {games
           .slice((pagina - 1) * porPagina, (pagina - 1) * porPagina + porPagina)

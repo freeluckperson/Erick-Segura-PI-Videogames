@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./Home.module.css";
 import { Link } from "react-router-dom";
 import { CardsContainer } from "../..";
-import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getGames } from "../../../redux/actions";
 
