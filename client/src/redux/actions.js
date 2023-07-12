@@ -2,8 +2,10 @@ import axios from "axios";
 export const GET_ALLGAMES = "GET_ALLGAMES";
 export const GET_GAME = "GET_GAMES";
 export const FILTER_GENRES = "FILTER_GENRES";
+export const FILTER_ORIGIN = "FILTER_GENRES";
 export const ORDER = "ORDER";
 export const ALPHABETH = "ALPHABETH";
+export const GET_VIDEOGAME_BY_NAME = "GET_VIDEOGAME_BY_NAME";
 
 const URL = "http://localhost:3001/videogames/";
 
@@ -14,8 +16,19 @@ export const getGames = () => {
   };
 };
 
+export const getVideogameByName = (name) => {
+  return async function (dispatch) {
+    const { data } = await axios(`http://localhost:3001/videogames?name=${name}`);
+    dispatch({ type: GET_VIDEOGAME_BY_NAME, payload: data });
+  };
+};
+
 export const filterByGenres = (genres) => {
   return { type: FILTER_GENRES, payload: genres };
+};
+
+export const filterByOrigin = (value) => {
+  return { type: FILTER_ORIGIN, payload: value };
 };
 
 export const orderByRating = (order) => {

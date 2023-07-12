@@ -38,7 +38,7 @@ const getDbVideogamesByName = async (name) => {
         name: vg.name,
         imag: vg.imag,
         rating: vg.rating,
-        genres: vg.genres.name //map((genre) => genre.name),
+        genres: vg.genres.map((genre) => genre.name),
       };
     });
 

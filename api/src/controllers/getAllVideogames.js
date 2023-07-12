@@ -37,13 +37,13 @@ const getAllDbVideogames = async () => {
 
 const getAllApiVideogames = async () => {
   try {
-    //const { data } = await axios(`https://api.rawg.io/api/games?key=${APIKEY}&page_size=100`);
+    // const { data } = await axios(`https://api.rawg.io/api/games?key=${APIKEY}&page_size=100`);
     //const { data } = await axios(`https://api.rawg.io/api/games?key=${APIKEY}&per_page=15`);
     const { data } = await axios(URL_MOCK);
     const api = data.results;
 
     const allGames = api.map((game) => ({
-      id: game.id,
+      id: game.id.toString(),
       name: game.name,
       released: game.released,
       rating: parseInt(game.rating),

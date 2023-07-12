@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   alphabetically,
   filterByGenres,
+  filterByOrigin,
   orderByRating,
 } from "../../redux/actions";
 
@@ -21,6 +22,10 @@ const CardsContainer = () => {
 
   const handlerFilter = (e) => {
     dispatch(filterByGenres([e.target.value]));
+  };
+
+  const handlerOrigin = (e) => {
+    dispatch(filterByOrigin([e.target.value]));
   };
 
   const handlerOrder = (e) => {
@@ -66,6 +71,11 @@ const CardsContainer = () => {
         <select onChange={handlerAlpha} style={st}>
           <option value="A">A</option>
           <option value="Z">Z</option>
+        </select>
+        <span>DATA</span>
+        <select onChange={handlerOrigin} style={st}>
+          <option value="DB">DB</option>
+          <option value="API">API</option>
         </select>
       </div>
       <div className={styles.container}>
