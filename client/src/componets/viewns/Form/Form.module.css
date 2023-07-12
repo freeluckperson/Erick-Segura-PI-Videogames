@@ -1,1 +1,27 @@
+.container  {
+    display: grid;
+    place-content: center;
+}
+.inputs {
+    margin-bottom: 1em;
+  width: 15em;
+  cursor: pointer;
+  height: 4.2vh;
+  color: khaki;
+  background-color: rgb(24, 24, 24);
+  border-color: inherit;
+  border: 2px solid khaki;
+  border-radius: 0.375rem 0 0.375rem 0;
+}
 
+.container button {
+    margin-top: 5em;
+  width: 5em;
+  cursor: pointer;
+  height: 4.2vh;
+  color: khaki;
+  background-color: rgb(24, 24, 24);
+  border-color: inherit;
+  border: 2px solid khaki;
+  border-radius: 0.375rem 0 0.375rem 0;
+}
