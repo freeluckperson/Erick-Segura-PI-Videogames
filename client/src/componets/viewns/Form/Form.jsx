@@ -12,38 +12,23 @@ function Form() {
     genres: [],
   });
 
-  const [errors, setErrors] = useState({
-    name: "",
-    released: "",
-    imag: "",
-    rating: "",
-    platforms: [],
-    description: "",
-    genres: [],
-  });
+  const [errors, setErrors] = useState({});
 
   const validate = (form) => {
-    // if (gameData.name.length === 0 || gameData.name.length < 15) {
-    //   setErrors({ ...errors, name: "" });
-    // } else {
-    //   setErrors({ ...errors, name: "Hay un error en name" });
-    // }
-    // https://wallpapercave.com/wp/T7EjKt1.jpg
-    const nameError =
-      form.name.length === 0 || form.name.length < 15
-        ? ""
-        : "Hay un error en name";
-    setErrors({ ...errors, name: nameError });
-
-    const imageError = /\.(jpg|jpeg|png|webp|avif|gif)$/.test(form.imag)
-      ? ""
-      : "Formato de imag no admitido";
-    setErrors({ ...errors, imag: imageError });
+    const errors = {};
+     if (gameData.imag.includes('http')) {errors.imag = ""}else{errors.imag = "Imag required"}
+     if (gameData.released.length > 8) {errors.released = ""}else{errors.released = "released required"}
+     if (gameData.rating.length > 0) {errors.rating = ""}else{errors.rating = "rating required"}
+     if (gameData.name.length <= 15) {errors.name = ""}else{errors.name = "Max 15 characters"}
+     if (gameData.description.length <= 20) {errors.description = ""}else{errors.description = "Max 20 characters"}
+     if(gameData.genres.length > 0){errors.genres = ""} else {errors.genres = "The game must have at least one gender"}
+     if(gameData.platforms.length > 0) {errors.genres = ""} else {errors.platforms = "the game must have at least one platform"}
+    return errors;
   };
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    validate({ ...gameData, [name]: value });
+    setErrors(validate({ ...gameData, [name]: value }));
     setGameData({ ...gameData, [name]: value });
   };
 
@@ -73,26 +58,31 @@ function Form() {
     <div className={styles.container}>
       <h1>Crear Nuevo Videojuego</h1>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="name">Nombre:</label>
-        <input
-          type="text"
-          name="name"
-          value={gameData.name}
-          onChange={handleInputChange}
-          required
-        />
-        {errors.name && <span>{errors.name}</span>}
+        <div>
+          <label htmlFor="name">Nombre:</label>
+          <input
+            type="text"
+            name="name"
+            value={gameData.name}
+            onChange={handleInputChange}
+            required
+          />
+          {errors.name && <span>{errors.name}</span>}
+        </div>
         <br />
         <br />
 
-        <label htmlFor="released">Released</label>
-        <input
-          type="date"
-          name="released"
-          value={gameData.released}
-          onChange={handleInputChange}
-          required
-        />
+        <div>
+          <label htmlFor="released">Released</label>
+          <input
+            type="date"
+            name="released"
+            value={gameData.released}
+            onChange={handleInputChange}
+            required
+          />
+          {errors.released && <span>{errors.released}</span>}
+        </div>
         <br />
         <br />
 
@@ -101,6 +91,7 @@ function Form() {
           type="text"
           name="imag"
           value={gameData.imag}
+          placeholder="https://imag.jpg"
           onChange={handleInputChange}
           required
         />
@@ -118,6 +109,7 @@ function Form() {
           onChange={handleInputChange}
           required
         />
+        {errors.rating && <span>{errors.rating}</span>}
         <br />
         <br />
 
@@ -131,6 +123,7 @@ function Form() {
           onChange={handleInputChange}
           required
         ></textarea>
+        {errors.description && <span>{errors.description}</span>}
         <br />
         <br />
 
@@ -187,6 +180,7 @@ function Form() {
           <option value="Game Gear">Game Gear</option>
           <option value="Neo Geo">Neo Geo</option>
         </select>
+        {errors.platforms && <span>{errors.platforms}</span>}
         <br />
         <br />
 
@@ -217,6 +211,7 @@ function Form() {
           <option value="34">Educational</option>
           <option value="17">Card</option>
         </select>
+        {errors.genres && <span>{errors.genres}</span>}
         <br />
         <br />
 

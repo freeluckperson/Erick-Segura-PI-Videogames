@@ -27,7 +27,6 @@ const getAllDbVideogames = async () => {
         imag: game.imag,
         rating: parseInt(game.rating),
         genres: game.genres?.map((genre) => genre.name),
-        
       };
     });
   } catch (error) {
@@ -36,27 +35,43 @@ const getAllDbVideogames = async () => {
 };
 
 const getAllApiVideogames = async () => {
-  try {
-    // const { data } = await axios(`https://api.rawg.io/api/games?key=${APIKEY}&page_size=100`);
-    //const { data } = await axios(`https://api.rawg.io/api/games?key=${APIKEY}&per_page=15`);
-    const { data } = await axios(URL_MOCK);
-    const api = data.results;
+  const url = "https://api.rawg.io/api/games";
 
-    const allGames = api.map((game) => ({
-      id: game.id.toString(),
-      name: game.name,
-      released: game.released,
-      rating: parseInt(game.rating),
-      imag: game.background_image,
-      genres: game.genres?.map((genre) => genre.name),
-      platforms: game.platforms?.map((p) => p.platform?.name),
-    }));
+  const { data: data1 } = await axios.get(url, {
+    params: {
+      key: "232664f6fc6541e2a787c5d2528caac5",
+      page: 1,
+      page_size: 40,
+    },
+  });
+  const { data: data2 } = await axios.get(url, {
+    params: {
+      key: "232664f6fc6541e2a787c5d2528caac5",
+      page: 2,
+      page_size: 40,
+    },
+  });
+  const { data: data3 } = await axios.get(url, {
+    params: {
+      key: "232664f6fc6541e2a787c5d2528caac5",
+      page: 3,
+      page_size: 25,
+    },
+  });
 
-    return allGames;
-  } catch (error) {
-    throw new Error(error.message);
-  }
-  
+  const api = [...data1.results, ...data2.results, ...data3.results];
+
+  const allGames = api.map((game) => ({
+    id: game.id.toString(),
+    name: game.name,
+    released: game.released,
+    rating: parseInt(game.rating),
+    imag: game.background_image,
+    genres: game.genres?.map((genre) => genre.name),
+    platforms: game.platforms?.map((p) => p.platform?.name),
+  }));
+
+  return allGames;
 };
 
 module.exports = getAllVideogames;
