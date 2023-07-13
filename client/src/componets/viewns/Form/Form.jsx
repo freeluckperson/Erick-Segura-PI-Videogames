@@ -1,344 +1,229 @@
 import React, { useState } from "react";
+import styles from "./Form.module.css";
 
-const Form = () => {
-  const [game, setGame] = useState({
+function Form() {
+  const [gameData, setGameData] = useState({
     name: "",
-    image: "",
-    description: "",
-    platforms: "",
-    releaseDate: "",
+    released: "",
+    imag: "",
     rating: "",
+    platforms: [],
+    description: "",
     genres: [],
   });
-  const [errors, setErrors] = useState({});
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    // setGame((prevGame) => ({
-    //   ...prevGame,
-    //   [name]: value,
-    // }));
-    setGame(([name] = value));
+  const [errors, setErrors] = useState({
+    name: "",
+    released: "",
+    imag: "",
+    rating: "",
+    platforms: [],
+    description: "",
+    genres: [],
+  });
+
+  const validate = (form) => {
+    // if (gameData.name.length === 0 || gameData.name.length < 15) {
+    //   setErrors({ ...errors, name: "" });
+    // } else {
+    //   setErrors({ ...errors, name: "Hay un error en name" });
+    // }
+    // https://wallpapercave.com/wp/T7EjKt1.jpg
+    const nameError =
+      form.name.length === 0 || form.name.length < 15
+        ? ""
+        : "Hay un error en name";
+    setErrors({ ...errors, name: nameError });
+
+    const imageError = /\.(jpg|jpeg|png|webp|avif|gif)$/.test(form.imag)
+      ? ""
+      : "Formato de imag no admitido";
+    setErrors({ ...errors, imag: imageError });
   };
 
-  const handleGenresChange = (event) => {
-    const selectedGenres = Array.from(
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    validate({ ...gameData, [name]: value });
+    setGameData({ ...gameData, [name]: value });
+  };
+
+  const handlePlatformChange = (event) => {
+    const selectedOptions = Array.from(
       event.target.selectedOptions,
       (option) => option.value
     );
-    setGame((prevGame) => ({
-      ...prevGame,
-      genres: selectedGenres,
-    }));
+    setGameData({ ...gameData, platforms: selectedOptions });
+  };
+
+  const handleGenreChange = (event) => {
+    const selectedOptions = Array.from(
+      event.target.selectedOptions,
+      (option) => option.value
+    );
+    setGameData({ ...gameData, genres: selectedOptions });
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    // Validar los campos del formulario
-    const newErrors = {};
-
-    if (game.name.trim() === "") {
-      newErrors.name = "El nombre es requerido";
-    }
-
-    if (game.image.trim() === "") {
-      newErrors.image = "La imagen es requerida";
-    }
-
-    if (game.description.trim() === "") {
-      newErrors.description = "La descripción es requerida";
-    }
-
-    if (game.platforms.trim() === "") {
-      newErrors.platforms = "Las plataformas son requeridas";
-    }
-
-    if (game.releaseDate.trim() === "") {
-      newErrors.releaseDate = "La fecha de lanzamiento es requerida";
-    }
-
-    if (game.rating.trim() === "") {
-      newErrors.rating = "El rating es requerido";
-    }
-
-    if (game.genres.length === 0) {
-      newErrors.genres = "Debe seleccionar al menos un género";
-    }
-
-    setErrors(newErrors);
-
-    // if (Object.keys(newErrors).length === 0) {
-    //   // Crear el objeto de videojuego con los valores del formulario
-    //   const newGame = {
-    //     name: game.name,
-    //     image: game.image,
-    //     description: game.description,
-    //     platforms: game.platforms,
-    //     releaseDate: game.releaseDate,
-    //     rating: game.rating,
-    //     genres: game.genres,
-    //   };
-
-    //   // Hacer algo con el objeto de videojuego (por ejemplo, enviarlo a un servidor)
-    //   console.log(newGame);
-    // }
+    console.log(gameData);
+    // Aquí puedes enviar los datos del videojuego al servidor o realizar otras acciones necesarias
   };
 
   return (
-    <div>
+    <div className={styles.container}>
       <h1>Crear Nuevo Videojuego</h1>
       <form onSubmit={handleSubmit}>
-        <label>
-          Nombre:
-          <input
-            type="text"
-            name="name"
-            value={game.name}
-            onChange={handleChange}
-            required
-          />
-          {errors.name && <span>{errors.name}</span>}
-        </label>
+        <label htmlFor="name">Nombre:</label>
+        <input
+          type="text"
+          name="name"
+          value={gameData.name}
+          onChange={handleInputChange}
+          required
+        />
+        {errors.name && <span>{errors.name}</span>}
+        <br />
         <br />
 
-        <label>
-          Imagen:
-          <input
-            type="text"
-            name="image"
-            value={game.image}
-            onChange={handleChange}
-            required
-          />
-          {errors.image && <span>{errors.image}</span>}
-        </label>
+        <label htmlFor="released">Released</label>
+        <input
+          type="date"
+          name="released"
+          value={gameData.released}
+          onChange={handleInputChange}
+          required
+        />
+        <br />
         <br />
 
-        <label>
-          Descripción:
-          <textarea
-            name="description"
-            value={game.description}
-            onChange={handleChange}
-            required
-          />
-          {errors.description && <span>{errors.description}</span>}
-        </label>
+        <label htmlFor="imag">Imag:</label>
+        <input
+          type="text"
+          name="imag"
+          value={gameData.imag}
+          onChange={handleInputChange}
+          required
+        />
+        {errors.imag && <span>{errors.imag}</span>}
+        <br />
         <br />
 
-        <label>
-          Plataformas:
-          <input
-            type="text"
-            name="platforms"
-            value={game.platforms}
-            onChange={handleChange}
-            required
-          />
-          {errors.platforms && <span>{errors.platforms}</span>}
-        </label>
+        <label htmlFor="rating">Rating:</label>
+        <input
+          type="number"
+          name="rating"
+          min="1"
+          max="5"
+          value={gameData.rating}
+          onChange={handleInputChange}
+          required
+        />
+        <br />
         <br />
 
-        <label>
-          Fecha de Lanzamiento:
-          <input
-            type="date"
-            name="releaseDate"
-            value={game.releaseDate}
-            onChange={handleChange}
-            required
-          />
-          {errors.releaseDate && <span>{errors.releaseDate}</span>}
-        </label>
+        <label htmlFor="description">Description:</label>
+        <br />
+        <textarea
+          name="description"
+          rows="4"
+          cols="50"
+          value={gameData.description}
+          onChange={handleInputChange}
+          required
+        ></textarea>
+        <br />
         <br />
 
-        <label>
-          Rating:
-          <input
-            type="number"
-            name="rating"
-            value={game.rating}
-            min="1"
-            max="5"
-            onChange={handleChange}
-            required
-          />
-          {errors.rating && <span>{errors.rating}</span>}
-        </label>
+        <label htmlFor="platforms">Platforms:</label>
+        <select
+          name="platforms"
+          multiple
+          value={gameData.platforms}
+          onChange={handlePlatformChange}
+          required
+        >
+          <option value="Xbox One">Xbox One</option>
+          <option value="Xbox 360">Xbox 360</option>
+          <option value="Xbox">Xbox</option>
+          <option value="PlayStation 5">PlayStation 5</option>
+          <option value="PlayStation 4">PlayStation 4</option>
+          <option value="PlayStation 3">PlayStation 3</option>
+          <option value="PlayStation 2">PlayStation 2</option>
+          <option value="PlayStation">PlayStation</option>
+          <option value="Nintendo Switch">Nintendo Switch</option>
+          <option value="Nintendo 3DS">Nintendo 3DS</option>
+          <option value="Nintendo DS">Nintendo DS</option>
+          <option value="Nintendo 64">Nintendo 64</option>
+          <option value="Game Boy Advance">Game Boy Advance</option>
+          <option value="Game Boy Color">Game Boy Color</option>
+          <option value="Game Boy">Game Boy</option>
+          <option value="GameCube">GameCube</option>
+          <option value="SNES">SNES</option>
+          <option value="NES">NES</option>
+          <option value="PC">PC</option>
+          <option value="Linux">Linux</option>
+          <option value="iOS">iOS</option>
+          <option value="PS Vita">PS Vita</option>
+          <option value="PSP">PSP</option>
+          <option value="Wii U">Wii U</option>
+          <option value="Classic Macintosh">Classic Macintosh</option>
+          <option value="Apple II">Apple II</option>
+          <option value="Commodore / Amiga">Commodore / Amiga</option>
+          <option value="Atari 7800">Atari 7800</option>
+          <option value="Atari 5200">Atari 5200</option>
+          <option value="Atari 2600">Atari 2600</option>
+          <option value="Atari Flashback">Atari Flashback</option>
+          <option value="Atari 8-bit">Atari 8-bit</option>
+          <option value="Atari ST">Atari ST</option>
+          <option value="Atari Lynx">Atari Lynx</option>
+          <option value="Atari XEGS">Atari XEGS</option>
+          <option value="Genesis">Genesis</option>
+          <option value="SEGA CD">SEGA CD</option>
+          <option value="SEGA 32X">SEGA 32X</option>
+          <option value="SEGA Master System">SEGA Master System</option>
+          <option value="Dreamcast">Dreamcast</option>
+          <option value="3DO">3DO</option>
+          <option value="Jaguar">Jaguar</option>
+          <option value="Game Gear">Game Gear</option>
+          <option value="Neo Geo">Neo Geo</option>
+        </select>
+        <br />
         <br />
 
-        <label>
-          Géneros:
-          <select
-            multiple
-            name="genres"
-            value={game.genres}
-            onChange={handleGenresChange}
-            required
-          >
-            <option value="accion">Acción</option>
-            <option value="aventura">Aventura</option>
-            <option value="estrategia">Estrategia</option>
-            <option value="rpg">RPG</option>
-            <option value="deportes">Deportes</option>
-          </select>
-          {errors.genres && <span>{errors.genres}</span>}
-        </label>
+        <label htmlFor="genres">Genres:</label>
+        <select
+          name="genres"
+          multiple
+          value={gameData.genres}
+          onChange={handleGenreChange}
+          required
+        >
+          <option value="4">Action</option>
+          <option value="51">Indie</option>
+          <option value="3">Adventure</option>
+          <option value="5">RPG</option>
+          <option value="10">Strategy</option>
+          <option value="2">Shooter</option>
+          <option value="40">Casual</option>
+          <option value="14">Simulation</option>
+          <option value="7">Puzzle</option>
+          <option value="11">Arcade</option>
+          <option value="83">Platformer</option>
+          <option value="59">Massively Multiplayer</option>
+          <option value="1">Racing</option>
+          <option value="15">Sports</option>
+          <option value="6">Fighting</option>
+          <option value="28">Board Games</option>
+          <option value="34">Educational</option>
+          <option value="17">Card</option>
+        </select>
+        <br />
         <br />
 
-        <button type="submit">Crear Videojuego</button>
+        <button type="submit">Crear Nuevo Videojuego</button>
       </form>
     </div>
   );
-};
+}
 
 export default Form;
-
-/**+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-
-// import axios from "axios";
-// import styles from "./Form.module.css";
-// import React, { useState } from "react";
-
-// const Form = () => {
-//   const [form, setForm] = useState({
-//     email: "",
-//     name: "",
-//     imag: "",
-//     rating: "",
-//     released: "",
-//     description: "",
-//     platforms: [],
-//     genres: [],
-//   });
-
-//   const [errors, setErrors] = useState({
-//     email: "",
-//     name: "",
-//     imag: "",
-//     rating: "",
-//     released: "",
-//     description: "",
-//     platforms: [],
-//     genres: [],
-//   });
-
-//   //el handler lee lo que escribo en el input y lo guarda en el estado
-//   const handlerChange = (event) => {
-//     validate({ ...form, [event.target.name]: event.target.value });
-//     setForm({ ...form, [event.target.name]: event.target.value });
-//   };
-
-//   const validate = (form) => {
-//     if (/\S+@\S+\.\S+/.test(form.email)) {
-//       setErrors({ ...errors, email: "" });
-//     } else {
-//       setErrors({ ...errors, email: "Hay un error en email" });
-//     }
-//   };
-
-//   const submitHandler = (event) => {
-//     event.preventDefault();
-//     // axios.post("http://localhost:3001/videogames/", form)
-//     // .then(res => alert(res))
-//     // .catch(err => alert(err))
-//     console.log(form);
-//   };
-
-//   return (
-//     <form onSubmit={submitHandler} className={styles.container}>
-//       <div>
-//         <label>email: </label>
-//         <input
-//           className={styles.inputs}
-//           type="text"
-//           value={form.email}
-//           onChange={handlerChange}
-//           name="email"
-//         />
-//         <span>{errors.email && errors.email}</span>
-//       </div>
-
-//       <div>
-//         <label>name: </label>
-//         <input
-//           className={styles.inputs}
-//           placeholder="name"
-//           type="text"
-//           value={form.name}
-//           onChange={handlerChange}
-//           name="name"
-//         />
-//       </div>
-
-//       <div>
-//         <label>imag: </label>
-//         <input
-//           className={styles.inputs}
-//           placeholder="https://wallpapercave.com/wp/T7EjKt1.jpg"
-//           type="text"
-//           value={form.imag}
-//           onChange={handlerChange}
-//           name="imag"
-//         />
-//       </div>
-
-//       <div>
-//         <label>rating: </label>
-//         <select
-//           className={styles.inputs}
-//           name="rating"
-//           onChange={handlerChange}
-//           value={form.rating}
-//         >
-//           <option hidden>Select Rating</option>
-//           <option value="1">1</option>
-//           <option value="2">2</option>
-//           <option value="3">3</option>
-//           <option value="4">4</option>
-//           <option value="5">5</option>
-//         </select>
-//       </div>
-
-//       <div>
-//         <label>released: </label>
-//         <input
-//           className={styles.inputs}
-//           placeholder="ej: 4/7/2023"
-//           type="text"
-//           value={form.released}
-//           onChange={handlerChange}
-//           name="released"
-//         />
-//       </div>
-
-//       <div>
-//         <label>platforms: </label>
-//         <input
-//           className={styles.inputs}
-//           placeholder="platforms"
-//           type="text"
-//           value={form.platforms}
-//           onChange={handlerChange}
-//           name="platforms"
-//         />
-//       </div>
-
-//       <div>
-//         <label>genres: </label>
-//         <input
-//           placeholder="genres"
-//           type="checkbox"
-//           value={form.genres}
-//           onChange={handlerChange}
-//           name="genres"
-//         />
-//       </div>
-
-//       <button type="submit">SUBMIT </button>
-//     </form>
-//   );
-// };
-
-// export default Form;
