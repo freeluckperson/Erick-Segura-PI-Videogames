@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios"
 import styles from "./Form.module.css";
 
 function Form() {
@@ -14,7 +15,7 @@ function Form() {
 
   const [errors, setErrors] = useState({});
 
-  const validate = (form) => {
+  const validate = () => {
     const errors = {};
      if (gameData.imag.includes('http')) {errors.imag = ""}else{errors.imag = "Imag required"}
      if (gameData.released.length > 8) {errors.released = ""}else{errors.released = "released required"}
@@ -50,7 +51,9 @@ function Form() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(gameData);
+    axios.post("http://localhost:3001/videogames/", gameData)
+    .then(res=> alert(res))
+    // console.log(gameData);
     // Aquí puedes enviar los datos del videojuego al servidor o realizar otras acciones necesarias
   };
 
