@@ -22,36 +22,17 @@ const rootReducer = (state = initialState, { type, payload }) => {
 
     case FILTER_GENRES:
       const filterFunction = (vg) => {
-        return payload.every((genre) => vg.genres.includes(genre));
+        return payload.some((genre) => vg.genres.includes(genre));
       };
       let copy = state.videogames.filter(filterFunction);
       return { ...state, filterVideogames: copy };
 
-    // case FILTER_ORIGIN:
-    //   let copy4 = state.videogames.filter((vg) => {
-    //     if (payload === "DB") {
-    //       return vg.id.length > 8;
-    //     } else if (payload === "API") {
-    //       return vg.id.length < 8;
-    //     } else {
-    //       return true; // Devuelve true para que no se filtre ningún elemento
-    //     }
-    //   });
-    //   console.log(copy4);
-    //   return { ...state, filterVideogames: copy4 };
-
     case FILTER_ORIGIN:
-      let copy4 = state.videogames.filter(({ id }) => {
-        if (payload === "DB") {
-          return id.length > 8;
-        }
-        if (payload === "API") {
-          return id.length < 8;
-        }
+      let copy4 = state.videogames.filter((game) => {
+        return game.Created === payload;
       });
 
-      console.log(copy4);
-      return { ...state, videogames: copy4 };
+      return { ...state, filterVideogames: copy4 };
 
     case ORDER:
       let copy2 = state.videogames;

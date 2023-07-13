@@ -2,7 +2,7 @@ import axios from "axios";
 export const GET_ALLGAMES = "GET_ALLGAMES";
 export const GET_GAME = "GET_GAMES";
 export const FILTER_GENRES = "FILTER_GENRES";
-export const FILTER_ORIGIN = "FILTER_GENRES";
+export const FILTER_ORIGIN = "FILTER_ORIGIN";
 export const ORDER = "ORDER";
 export const ALPHABETH = "ALPHABETH";
 export const GET_VIDEOGAME_BY_NAME = "GET_VIDEOGAME_BY_NAME";
@@ -23,12 +23,19 @@ export const getVideogameByName = (name) => {
   };
 };
 
-export const filterByGenres = (genres) => {
-  return { type: FILTER_GENRES, payload: genres };
+export const filterByGenres = (payload) => {
+  return { type: FILTER_GENRES, payload };
 };
 
-export const filterByOrigin = (value) => {
-  return { type: FILTER_ORIGIN, payload: value };
+// export const filterByOrigin = (payload) => {
+//   console.log(payload);
+//   return { type: FILTER_ORIGIN, payload };
+// };
+
+export const filterByOrigin=(origen)=>{
+  return {
+    type: FILTER_ORIGIN,
+    payload:origen}
 };
 
 export const orderByRating = (order) => {

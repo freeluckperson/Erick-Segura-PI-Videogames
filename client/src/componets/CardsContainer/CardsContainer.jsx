@@ -22,10 +22,12 @@ const CardsContainer = () => {
 
   const handlerFilter = (e) => {
     dispatch(filterByGenres([e.target.value]));
+    setAux(true);
   };
 
   const handlerOrigin = (e) => {
-    dispatch(filterByOrigin([e.target.value]));
+    dispatch(filterByOrigin(e.target.value));
+    setAux(true);
   };
 
   const handlerOrder = (e) => {
@@ -73,9 +75,10 @@ const CardsContainer = () => {
           <option value="Z">Z</option>
         </select>
         <span>DATA</span>
+
         <select onChange={handlerOrigin} style={st}>
-          <option value="DB">DB</option>
-          <option value="API">API</option>
+          <option value="YES">YES</option>
+          <option value="NO">NO</option>
         </select>
       </div>
       <div className={styles.container}>
