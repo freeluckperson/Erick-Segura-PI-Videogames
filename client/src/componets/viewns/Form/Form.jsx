@@ -52,7 +52,7 @@ function Form() {
   const handleSubmit = (event) => {
     event.preventDefault();
     axios.post("http://localhost:3001/videogames/", gameData)
-    .then(res=> alert(res))
+    .then(res=> alert(`${res} Game save in DB`))
     // console.log(gameData);
     // Aquí puedes enviar los datos del videojuego al servidor o realizar otras acciones necesarias
   };

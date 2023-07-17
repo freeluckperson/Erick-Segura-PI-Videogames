@@ -3,21 +3,16 @@ import styles from "./CardsContainer.module.css";
 import Paginacion from "../Paginacion/Paginacion";
 import { Card } from "../";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  alphabetically,
-  filterByGenres,
-  filterByOrigin,
-  orderByRating,
-} from "../../redux/actions";
+import { alphabetically, filterByGenres, filterByOrigin, orderByRating} from "../../redux/actions";
 
 const CardsContainer = () => {
   const st = { width: "80px", marginBottom: "4em", marginRight: "1em" };
   const [aux, setAux] = useState(false);
-  const dispatch = useDispatch();
-  const { filterVideogames: games } = useSelector((state) => state);
-
   const [pagina, setPagina] = useState(1);
   const [porPagina, setPorPagina] = useState(15);
+  const dispatch = useDispatch();
+  const games = useSelector((state) => state.filterVideogames);
+
   const maximo = games.length / porPagina;
 
   const handlerFilter = (e) => {
@@ -77,15 +72,15 @@ const CardsContainer = () => {
         <span>DATA</span>
 
         <select onChange={handlerOrigin} style={st}>
-          <option value="YES">YES</option>
-          <option value="NO">NO</option>
+          <option value="YES">DB</option>
+          <option value="NO">API</option>
         </select>
       </div>
       <div className={styles.container}>
         {games
           .slice((pagina - 1) * porPagina, (pagina - 1) * porPagina + porPagina)
           .map(({ id, name, imag, genres }) => (
-            <Card name={name} imag={imag} genres={genres} id={id} key={id} />
+            <Card key={id} name={name} imag={imag} genres={genres} id={id} />
           ))}
       </div>
       <Paginacion pagina={pagina} setPagina={setPagina} maximo={maximo} />

@@ -23,14 +23,7 @@ const getDbVideogamesByName = async (name) => {
           [Op.iLike]: `%${name}%`,
         },
       },
-      //include: Genre,
-      include: {
-        model: Genre,
-        attributes: ["name"],
-        through: {
-          attributes: [],
-        },
-      },
+      include: Genre,
     });
     const dbVideogames = auxVideogames.map((vg) => {
       return {
@@ -38,7 +31,7 @@ const getDbVideogamesByName = async (name) => {
         name: vg.name,
         imag: vg.imag,
         rating: vg.rating,
-        genres: vg.genres.map((genre) => genre.name),
+        genres: vg.genres.map(({name}) => name),
       };
     });
 
@@ -51,18 +44,16 @@ const getDbVideogamesByName = async (name) => {
 const getApiVideogamesByName = async (name) => {
   try {
     const { data } = await axios(
-      `https://api.rawg.io/api/games?search=${name}&key=${APIKEY}&page_size=15`
+      `https://api.rawg.io/api/games?search=${name}&key=${APIKEY}`
     );
     const api = data.results;
     const apiVideogames = api.map((game) => {
       return {
         id: game.id,
         name: game.name,
-        imag: game.background_image
-          ? game.background_image
-          : "https://sm.ign.com/ign_es/screenshot/default/60225-metal-gear-solid-3-subsistence-playstation-2_umwf.jpg",
+        imag: game.background_image,
         rating: game.rating_top,
-        genres: game.genres.map((genre) => genre.name),
+        genres: game.genres.map(({name}) => name),
       };
     });
     return apiVideogames;

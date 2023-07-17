@@ -1,5 +1,5 @@
-//const fetch = require('node-fetch')
-const { Genre } = require('../db')
+const { Genre } = require("../db")
+const axios = require(`axios`) 
 const { APIKEY } = process.env
 
 const getAllGenres = async () => {
@@ -7,31 +7,30 @@ const getAllGenres = async () => {
     const dbGenres = await Genre.findAll()
 
     if (!dbGenres.length) {
-      let genres
-      await fetch(`https://api.rawg.io/api/genres?key=${APIKEY}`)
-        .then(res => res.json())
-        .then(async ({ results }) => {
-          if (!results) throw Error('API request error')
-          genres = results.map(genre => {
-            return {
-              id: genre.id,
-              name: genre.name
-            }
-          })
-          await Genre.bulkCreate(genres)
-        })
+      let genres;
+      const { data } = await axios(`https://api.rawg.io/api/genres?key=${APIKEY}`)
+      const { results } = data;
+      if (!results) throw Error("API request error")
+      genres = results.map((genre) => {
+        return {
+          id: genre.id,
+          name: genre.name,
+        };
+      });
+      await Genre.bulkCreate(genres)
+
       return genres
     }
 
-    return dbGenres.map(genre => {
+    return dbGenres.map((genre) => {
       return {
         id: genre.id,
-        name: genre.name
+        name: genre.name,
       }
     })
   } catch (error) {
     throw Error(error.message)
   }
-}
+};
 
 module.exports = getAllGenres
