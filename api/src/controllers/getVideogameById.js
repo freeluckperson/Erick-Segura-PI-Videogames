@@ -28,7 +28,7 @@ const searchOnApi = async (id) => {
         let apiVideogame;
         const { data } = await axios(`https://api.rawg.io/api/games/${id}?key=${APIKEY}`);
           
-            if (data.detail) throw Error('Videogame not found');
+            if (!data.name.length) throw Error('Videogame not found');
             apiVideogame = {
               id: data.id,
               name: data.name,
