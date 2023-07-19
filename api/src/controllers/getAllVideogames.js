@@ -1,15 +1,15 @@
-const axios = require(`axios`);
-require(`dotenv`).config();
-const { Videogame, Genre } = require(`../db`);
+const axios = require('axios');
+require('dotenv').config();
+const { Videogame, Genre } = require('../db');
 const { APIKEY } = process.env;
 
 const getAllVideogames = async () => {
   try {
     const apiVideogames = await getAllApiVideogames();
     const dbVideogames = await getAllDbVideogames();
-    if (![...dbVideogames, ...apiVideogames].length)
-      throw new Error(`Videogames is empty`);
-    return [...dbVideogames, ...apiVideogames];
+    const allVideogames = [...dbVideogames, ...apiVideogames];
+    if (!allVideogames.length) throw new Error('Videogames is empty');
+    return allVideogames;
   } catch (error) {
     throw new Error(error.message);
   }
@@ -20,18 +20,16 @@ const getAllDbVideogames = async () => {
     const videogames = await Videogame.findAll({
       include: Genre,
     });
-    return videogames.map((game) => {
-      return {
-        id: game.id,
-        name: game.name,
-        released: game.released,
-        rating: parseInt(game.rating),
-        imag: game.imag,
-        Created: game.Created,
-        genres: game.genres?.map(({ name }) => name),
-        platforms: game.platforms?.map((platform) => platform),
-      };
-    });
+    return videogames.map(({ id, name, released, rating, imag, Created, genres, platforms }) => ({
+      id,
+      name,
+      released,
+      rating: parseInt(rating),
+      imag,
+      Created,
+      genres: genres?.map(({ name }) => name),
+      platforms: platforms?.map((platform) => platform),
+    }));
   } catch (error) {
     throw new Error(error.message);
   }
@@ -39,38 +37,31 @@ const getAllDbVideogames = async () => {
 
 const getAllApiVideogames = async () => {
   try {
-    // const getVideogamesInfo = async (url) => {
-    //   const { data } = await axios.get(url);
-    //   return data.results;
-    // };
-
-    // const getData = (url) => getVideogamesInfo(url);
-
-    // const url = `https://api.rawg.io/api/games?key=${APIKEY}&page=1&page_size=40`;
-    // const url2 = `https://api.rawg.io/api/games?key=${APIKEY}&page=2&page_size=40`;
-    // const url3 = `https://api.rawg.io/api/games?key=${APIKEY}&page=3&page_size=25`;
-
-    // const pendingPromises = [url, url2, url3].map(getData);
-    // const allData = await Promise.all(pendingPromises);
-    // const api = allData.flat();
-
-    const { data } = await axios(
-      `https://api.rawg.io/api/games?key=${APIKEY}&page=2&page_size=40`
-    );
-    const api = data.results;
-
-    const allGames = api.map((game) => ({
-      id: game.id.toString(),
-      name: game.name,
-      released: game.released,
-      rating: parseInt(game.rating),
-      imag: game.background_image,
-      Created: "NO",
-      genres: game.genres?.map(({ name }) => name),
-      platforms: game.platforms?.map((p) => p.platform?.name),
-    }));
-
-    return allGames;
+    const urls = [
+      { name: 'page1', url: `https://api.rawg.io/api/games?key=${APIKEY}&page=1&page_size=40` },
+      { name: 'page2', url: `https://api.rawg.io/api/games?key=${APIKEY}&page=2&page_size=40` },
+      { name: 'page3', url: `https://api.rawg.io/api/games?key=${APIKEY}&page=3&page_size=20` },
+    ];
+    const getVideogamesInfo = async ({ name, url }) => {
+      const { data } = await axios.get(url);
+      return { name, data: data.results };
+    };
+    const pendingPromises = urls.map(getVideogamesInfo);
+    const allData = await Promise.allSettled(pendingPromises);
+    const api = allData
+      .filter(({ status }) => status === 'fulfilled')
+      .flatMap(({ value }) => value.data)
+      .map(({ id, name, released, rating, background_image, genres, platforms }) => ({
+        id: id.toString(),
+        name,
+        released,
+        rating: parseInt(rating),
+        imag: background_image,
+        Created: 'NO',
+        genres: genres?.map(({ name }) => name),
+        platforms: platforms?.map(({ platform }) => platform?.name),
+      }));
+    return api;
   } catch (error) {
     throw new Error(error.message);
   }
