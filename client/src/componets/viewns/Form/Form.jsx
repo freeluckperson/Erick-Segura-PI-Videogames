@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios"
 import styles from "./Form.module.css";
 
-function Form() {
+
+const Form = () => {
   const [gameData, setGameData] = useState({
     name: "",
     released: "",
@@ -23,9 +24,13 @@ function Form() {
      if (gameData.name.length <= 15) {errors.name = ""}else{errors.name = "Max 15 characters"}
      if (gameData.description.length <= 20) {errors.description = ""}else{errors.description = "Max 20 characters"}
      if(gameData.genres.length > 0){errors.genres = ""} else {errors.genres = "The game must have at least one gender"}
-     if(gameData.platforms.length > 0) {errors.genres = ""} else {errors.platforms = "the game must have at least one platform"}
+     if(gameData.platforms.length > 0) {errors.platforms = ""} else {errors.platforms = "the game must have at least one platform"}
     return errors;
   };
+
+  useEffect(() => {
+    setErrors(validate());
+  }, [gameData]);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -53,8 +58,6 @@ function Form() {
     event.preventDefault();
     axios.post("http://localhost:3001/videogames/", gameData)
     .then(res=> alert(`${res} Game save in DB`))
-    // console.log(gameData);
-    // Aquí puedes enviar los datos del videojuego al servidor o realizar otras acciones necesarias
   };
 
   return (
@@ -70,7 +73,7 @@ function Form() {
             onChange={handleInputChange}
             required
           />
-          {errors.name && <span>{errors.name}</span>}
+           <span>{errors.name && errors.name}</span>
         </div>
         <br />
         <br />
@@ -84,7 +87,7 @@ function Form() {
             onChange={handleInputChange}
             required
           />
-          {errors.released && <span>{errors.released}</span>}
+          <span>{errors.released && errors.released}</span>
         </div>
         <br />
         <br />
@@ -98,7 +101,7 @@ function Form() {
           onChange={handleInputChange}
           required
         />
-        {errors.imag && <span>{errors.imag}</span>}
+         <span>{errors.imag && errors.imag}</span>
         <br />
         <br />
 
@@ -112,7 +115,7 @@ function Form() {
           onChange={handleInputChange}
           required
         />
-        {errors.rating && <span>{errors.rating}</span>}
+        <span>{errors.rating && errors.rating}</span>
         <br />
         <br />
 
@@ -126,7 +129,38 @@ function Form() {
           onChange={handleInputChange}
           required
         ></textarea>
-        {errors.description && <span>{errors.description}</span>}
+         <span>{errors.description && errors.description}</span>
+        <br />
+        <br />
+
+        <label htmlFor="genres">Genres:</label>
+        <select
+          name="genres"
+          multiple
+          value={gameData.genres}
+          onChange={handleGenreChange}
+          required
+        >
+          <option value="4">Action</option>
+          <option value="51">Indie</option>
+          <option value="3">Adventure</option>
+          <option value="5">RPG</option>
+          <option value="10">Strategy</option>
+          <option value="2">Shooter</option>
+          <option value="40">Casual</option>
+          <option value="14">Simulation</option>
+          <option value="7">Puzzle</option>
+          <option value="11">Arcade</option>
+          <option value="83">Platformer</option>
+          <option value="59">Massively Multiplayer</option>
+          <option value="1">Racing</option>
+          <option value="15">Sports</option>
+          <option value="6">Fighting</option>
+          <option value="28">Board Games</option>
+          <option value="34">Educational</option>
+          <option value="17">Card</option>
+        </select>
+         <span>{errors.genres && errors.genres}</span>
         <br />
         <br />
 
@@ -183,38 +217,7 @@ function Form() {
           <option value="Game Gear">Game Gear</option>
           <option value="Neo Geo">Neo Geo</option>
         </select>
-        {errors.platforms && <span>{errors.platforms}</span>}
-        <br />
-        <br />
-
-        <label htmlFor="genres">Genres:</label>
-        <select
-          name="genres"
-          multiple
-          value={gameData.genres}
-          onChange={handleGenreChange}
-          required
-        >
-          <option value="4">Action</option>
-          <option value="51">Indie</option>
-          <option value="3">Adventure</option>
-          <option value="5">RPG</option>
-          <option value="10">Strategy</option>
-          <option value="2">Shooter</option>
-          <option value="40">Casual</option>
-          <option value="14">Simulation</option>
-          <option value="7">Puzzle</option>
-          <option value="11">Arcade</option>
-          <option value="83">Platformer</option>
-          <option value="59">Massively Multiplayer</option>
-          <option value="1">Racing</option>
-          <option value="15">Sports</option>
-          <option value="6">Fighting</option>
-          <option value="28">Board Games</option>
-          <option value="34">Educational</option>
-          <option value="17">Card</option>
-        </select>
-        {errors.genres && <span>{errors.genres}</span>}
+         <span>{errors.platforms && errors.platforms}</span>
         <br />
         <br />
 
