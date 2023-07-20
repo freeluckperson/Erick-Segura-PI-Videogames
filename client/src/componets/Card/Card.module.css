@@ -1,8 +1,6 @@
 .container {
   display: grid;
   grid-template-columns: repeat(auto-fit);
-  /* grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); */
-  /* grid-gap: 10px; */
 }
 
 .navLink {
@@ -10,22 +8,27 @@
   font-size: small;
   max-width: 250px;
   text-align: center;
+  text-decoration: none;
   display: grid;
   place-items: center;
+  font-family: serif;
 }
 
 .card {
-  background-color: rgb(24, 24, 24);
-  padding: 15px;
-  display: grid;
-  place-items: center;
-  border: 1px solid black;
-  border-radius: 5%;
+  width: 190px;
+  height: 274px;
+  background: rgb(24 24 24);
+  padding: 0.4em;
+  border-radius: 10px;
+  border: 1px solid rgb(127, 39, 209);
 }
 
 .card img {
-  width: 250px;
-  height: 200px;
+  width: 190px;
+  height: 100px;
+  margin-bottom: 1em;
+  border-radius: 5px;
+  border: 1px solid rgb(127, 39, 209);
 }
 
 .card h4 {

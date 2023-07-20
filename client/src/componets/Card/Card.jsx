@@ -7,11 +7,10 @@ const Card = (props) => {
   return (
     <div className={styles.container}>
       <div className={styles.card}>
-        <Link to={`/detail/${id}`} className={styles.navLink} >
-            <h1>{name}</h1>
-            <img src={imag} />
-            <h6>GENRES: </h6>
-            {genres.map(genre => (<span>{genre}</span>))}
+        <Link to={`/detail/${id}`} className={styles.navLink}>
+          <h3>{name}</h3>
+          <img src={imag} />
+          {genres.map(genre => <div>{genre}</div>)}
         </Link>
       </div>
     </div>
@@ -19,5 +18,3 @@ const Card = (props) => {
 };
 
 export default Card;
-
-
