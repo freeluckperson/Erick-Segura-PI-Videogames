@@ -54,3 +54,6 @@
   display: flex;
   direction: row;
 }
+.container button {
+  height: 4em;
+}

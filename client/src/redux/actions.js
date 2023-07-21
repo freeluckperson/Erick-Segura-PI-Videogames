@@ -12,12 +12,12 @@ export const filterByOrigin=(payload)=>{
   return { type: FILTER_ORIGIN, payload}
 }
 
-export const orderByRating = (order) => {
-  return { type: ORDER, payload: order }
+export const orderByRating = (payload) => {
+  return { type: ORDER, payload }
 }
 
-export const alphabetically = (order) => {
-  return { type: ALPHABETH, payload: order }
+export const alphabetically = (payload) => {
+  return { type: ALPHABETH, payload }
 }
 
 export const getGames = () => {

@@ -3,6 +3,7 @@ import { GET_ALLGAMES, FILTER_GENRES, FILTER_ORIGIN, ORDER, ALPHABETH,  GET_VIDE
 const initialState = {
   videogames: [], 
   filterVideogames: [],
+  orderVideogames: [],
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -37,7 +38,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
           return 0;
         }
       });
-      return { ...state, filterVideogames: order };
+      return { ...state, orderVideogames: order };
 
     case ALPHABETH:
       let copy3 = state.videogames;
@@ -49,7 +50,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
         }
       });
 
-      return { ...state, filterVideogames: alpha };
+      return { ...state, orderVideogames: alpha };
 
     default:
       return { ...state };

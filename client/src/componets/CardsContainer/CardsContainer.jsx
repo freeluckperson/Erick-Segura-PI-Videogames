@@ -5,11 +5,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { alphabetically, filterByGenres, filterByOrigin, orderByRating } from '../../redux/actions';
 import SearchBar from '../SearchBar/SearchBar';
 
-const CardsContainer = () => {
+const CardsContainer = ({games}) => {
   const st = { width: '80px', marginBottom: '4em', marginRight: '1em' };
   const dispatch = useDispatch();
-  const { filterVideogames: games } = useSelector((state) => state);
-
+  
   const [currentPage, setCurrentPage] = useState(1);
   const [elementsPerPage, setElementsPerPage] = useState(15);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);

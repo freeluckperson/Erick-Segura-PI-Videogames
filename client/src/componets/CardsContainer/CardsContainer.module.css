@@ -1,8 +1,24 @@
 .container {
   display: grid;
-  grid-template-columns: repeat(5, 1fr); 
+  grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(3, 1fr);
   gap: 1em;
+}
+
+.pagContainer {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1em;
+  width: 20%;
+  margin-top: 2em;
+  margin-left: 32em;
+}
+
+.pagContainer button {
+  background-color: black;
+  color: khaki;
+  border: 2px solid khaki;
+  border-radius: 0 0.375rem 0.375rem 0;
 }
 
 .filtros {

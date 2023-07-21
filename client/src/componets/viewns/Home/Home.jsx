@@ -2,19 +2,21 @@ import React, { useEffect, useState } from "react";
 import styles from "./Home.module.css";
 import { Link } from "react-router-dom";
 import { CardsContainer } from "../..";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getGames } from "../../../redux/actions";
+
 
 const Home = () => {
   const dispatch = useDispatch();
+  const {filterVideogames: games} = useSelector(state => state)
 
   useEffect(() => {
-    dispatch(getGames());
-  }, [dispatch]);
+    !games.length && dispatch(getGames());
+  }, [dispatch, games]);
 
   return (
     <div>
-      <CardsContainer />
+      <CardsContainer games={games}/>
       <Link to="/" className={styles.navLink}>BACK</Link>
     </div>
   );
