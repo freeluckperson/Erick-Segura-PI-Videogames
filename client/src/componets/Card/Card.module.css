@@ -19,16 +19,16 @@
   height: 274px;
   background: rgb(24 24 24);
   padding: 0.4em;
-  border-radius: 10px;
-  border: 1px solid rgb(127, 39, 209);
+  border-radius: 0.9rem 0 0.9rem 0;
+  border: 1px solid khaki;
 }
 
 .card img {
   width: 190px;
   height: 100px;
   margin-bottom: 1em;
-  border-radius: 5px;
-  border: 1px solid rgb(127, 39, 209);
+  border-radius: 0.375rem 0 0.375rem 0;
+  border: 1px solid khaki;
 }
 
 .card h4 {

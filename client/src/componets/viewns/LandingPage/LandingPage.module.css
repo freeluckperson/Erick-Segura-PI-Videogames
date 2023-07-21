@@ -1,7 +1,12 @@
 .container {
   display: grid;
   place-content: center;
-  margin-top: 25em;
+  margin: -8px;
+  height: 800px;
+  width: 101%;
+  background-image: url("https://wallpapercave.com/wp/T7EjKt1.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 .navLink {
   display: inline-block;
