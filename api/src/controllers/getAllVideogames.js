@@ -40,7 +40,7 @@ const getAllApiVideogames = async () => {
     const urls = [
       { name: 'page1', url: `https://api.rawg.io/api/games?key=${APIKEY}&page=1&page_size=40` },
       { name: 'page2', url: `https://api.rawg.io/api/games?key=${APIKEY}&page=2&page_size=40` },
-      { name: 'page3', url: `https://api.rawg.io/api/games?key=${APIKEY}&page=3&page_size=20` },
+      // { name: 'page3', url: `https://api.rawg.io/api/games?key=${APIKEY}&page=3&page_size=20` },
     ];
     const getVideogamesInfo = async ({ name, url }) => {
       const { data } = await axios.get(url);

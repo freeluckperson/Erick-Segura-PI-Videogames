@@ -21,18 +21,17 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return { ...state, filterVideogames: copy };
 
     case FILTER_ORIGIN:
-      let copy4 = state.videogames.filter((game) => {
+      let copy4 = payload === 'ALL'? state.videogames : state.videogames.filter((game) => {
         return game.Created === payload;
       });
-
       return { ...state, filterVideogames: copy4 };
 
     case ORDER:
       let copy2 = state.videogames;
       let order = copy2.sort((a, b) => {
-        if (payload === "Mayor") {
+        if (payload === 'Mayor') {
           return b.rating - a.rating;
-        } else if (payload === "Menor") {
+        } else if (payload === 'Minor') {
           return a.rating - b.rating;
         } else {
           return 0;
@@ -43,9 +42,9 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case ALPHABETH:
       let copy3 = state.videogames;
       let alpha = copy3.sort((a, b) => {
-        if (payload === "A") {
+        if (payload === 'A') {
           return a.name.localeCompare(b.name);
-        } else if (payload === "Z") {
+        } else if (payload === 'Z') {
           return b.name.localeCompare(a.name);
         }
       });

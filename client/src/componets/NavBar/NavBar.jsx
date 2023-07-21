@@ -9,8 +9,7 @@ const NavBar = () => {
       <Link to="/home" className={styles.navLink}> HOME </Link>
       <Link to="/create" className={styles.navLink}> CREATE </Link>
       <div style={{ marginLeft: "25em", marginTop: "-3em" }}>
-        {/* <SearchBar /> */}
-      </div>
+    </div>
     </div>
   );
 };
