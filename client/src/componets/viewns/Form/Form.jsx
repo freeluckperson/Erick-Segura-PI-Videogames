@@ -58,6 +58,15 @@ const Form = () => {
     event.preventDefault();
     axios.post("http://localhost:3001/videogames/", gameData)
     .then(res=> alert(`${res} Game save in DB`))
+    setGameData({
+      name: "",
+      released: "",
+      imag: "",
+      rating: "",
+      platforms: [],
+      description: "",
+      genres: [],
+    })
   };
 
   return (

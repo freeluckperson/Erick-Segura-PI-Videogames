@@ -9,10 +9,10 @@ import {
   filterByOrigin,
   orderByRating,
 } from "../../redux/actions";
+import SearchBar from "../SearchBar/SearchBar";
 
 const CardsContainer = () => {
   const st = { width: "80px", marginBottom: "4em", marginRight: "1em" };
-  const [aux, setAux] = useState(false);
   const dispatch = useDispatch();
   const { filterVideogames: games } = useSelector((state) => state);
 
@@ -22,22 +22,22 @@ const CardsContainer = () => {
 
   const handlerFilter = (e) => {
     dispatch(filterByGenres([e.target.value]));
-    setAux(true);
+    setPagina(1)
   };
 
   const handlerOrigin = (e) => {
     dispatch(filterByOrigin(e.target.value));
-    setAux(true);
+    setPagina(1)
   };
 
   const handlerOrder = (e) => {
     dispatch(orderByRating(e.target.value));
-    setAux(true);
+    setPagina(1)
   };
 
   const handlerAlpha = (e) => {
     dispatch(alphabetically(e.target.value));
-    setAux(true);
+    setPagina(1)
   };
 
   return (
@@ -81,6 +81,7 @@ const CardsContainer = () => {
           <option value="NO">API</option>
         </select>
       </div>
+        <SearchBar/>
       <div className={styles.container}>
         {games
           .slice((pagina - 1) * porPagina, (pagina - 1) * porPagina + porPagina)
