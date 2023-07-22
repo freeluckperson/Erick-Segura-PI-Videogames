@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './CardsContainer.module.css';
 import { Card } from '../';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { alphabetically, filterByGenres, filterByOrigin, orderByRating } from '../../redux/actions';
 import SearchBar from '../SearchBar/SearchBar';
 
@@ -80,7 +80,7 @@ const CardsContainer = ({games}) => {
         </select>
       </div>
       <div style={{ marginTop: '1em' }}>
-        <SearchBar />
+        <SearchBar setCurrentPage={setCurrentPage} />
       </div>
       <div className={styles.container}>
         {currentElements.length === 0 && <h1>Buscando juegos, por favor espera...</h1>}
