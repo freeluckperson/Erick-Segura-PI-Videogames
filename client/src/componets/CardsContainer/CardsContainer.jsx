@@ -41,6 +41,7 @@ const CardsContainer = ({games}) => {
   return (
     <div>
       <div className={styles.filtros}>
+
         <span>GENRES</span>
         <select onChange={handlerFilter} style={st} >
           <option value="Action">Action</option>
@@ -62,23 +63,28 @@ const CardsContainer = ({games}) => {
           <option value="Casual">Casual</option>
           <option value="Card">Card</option>
         </select>
-        <span>RATING</span>
-        <select onChange={handlerOrder} style={st}>
-          <option value="Mayor">Mayor</option>
-          <option value="Minor">Minor</option>
-        </select>
-        <span>A - Z</span>
-        <select onChange={handlerAlpha} style={st}>
-          <option value="A">A</option>
-          <option value="Z">Z</option>
-        </select>
+
         <span>ORIGIN</span>
         <select onChange={handlerOrigin} style={st}>
-          <option value="YES">DB</option>
-          <option value="NO">API</option>
-          <option value="ALL">ALL</option>
+          <option value='YES'>DB</option>
+          <option value='NO'>API</option>
+          <option value='ALL'>ALL</option>
         </select>
+
+        <span>RATING</span>
+        <select onChange={handlerOrder} style={st}>
+          <option value='Mayor'>Mayor</option>
+          <option value='Minor'>Minor</option>
+        </select>
+
+        <span>A - Z</span>
+        <select onChange={handlerAlpha} style={st}>
+          <option value='A'>A</option>
+          <option value='Z'>Z</option>
+        </select>
+
       </div>
+
       <div style={{marginTop: '1em'}}>
         <SearchBar setCurrentPage={setCurrentPage} />
       </div>

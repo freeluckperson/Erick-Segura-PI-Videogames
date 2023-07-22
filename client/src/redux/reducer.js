@@ -1,60 +1,58 @@
-import { GET_ALLGAMES, FILTER_GENRES, FILTER_ORIGIN, ORDER, ALPHABETH,  GET_VIDEOGAME_BY_NAME } from './index';
+import { GET_ALLGAMES, FILTER_GENRES, FILTER_ORIGIN, ORDER, ALPHABETH,  GET_VIDEOGAME_BY_NAME } from './index'
 
 const initialState = {
   videogames: [], 
   filterVideogames: [],
   orderVideogames: [],
-};
+}
 
 const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case GET_ALLGAMES:
-      return { ...state, videogames: payload, filterVideogames: payload };
+      return { ...state, videogames: payload, filterVideogames: payload }
 
     case GET_VIDEOGAME_BY_NAME:
-      return { ...state, videogames: payload, filterVideogames: payload };
+      return { ...state, videogames: payload, filterVideogames: payload }
 
     case FILTER_GENRES:
       const filterFunction = (vg) => {
-        return payload.some((genre) => vg.genres.includes(genre));
+        return payload.some((genre) => vg.genres.includes(genre))
       };
-      let copy = state.videogames.filter(filterFunction);
-      return { ...state, filterVideogames: copy };
+      let copy = state.videogames.filter(filterFunction)
+      return { ...state, filterVideogames: copy }
 
     case FILTER_ORIGIN:
-      let copy4 = payload === 'ALL'? state.videogames : state.videogames.filter((game) => {
-        return game.Created === payload;
+      let copy1 = payload === 'ALL'? state.videogames : state.videogames.filter((game) => {
+        return game.Created === payload
       });
-      return { ...state, filterVideogames: copy4 };
+      return { ...state, filterVideogames: copy1 }
 
     case ORDER:
-      let copy2 = state.videogames;
-      let order = copy2.sort((a, b) => {
+      let copy2 = state.videogames.sort((a, b) => {
         if (payload === 'Mayor') {
-          return b.rating - a.rating;
+          return b.rating - a.rating
         } else if (payload === 'Minor') {
-          return a.rating - b.rating;
+          return a.rating - b.rating
         } else {
-          return 0;
+          return 0
         }
-      });
-      return { ...state, orderVideogames: order };
+      })
+      return { ...state, orderVideogames: copy2 }
 
     case ALPHABETH:
-      let copy3 = state.videogames;
-      let alpha = copy3.sort((a, b) => {
+      let copy3 = state.videogames.sort((a, b) => {
         if (payload === 'A') {
-          return a.name.localeCompare(b.name);
+          return a.name.localeCompare(b.name)
         } else if (payload === 'Z') {
-          return b.name.localeCompare(a.name);
+          return b.name.localeCompare(a.name)
         }
       });
 
-      return { ...state, orderVideogames: alpha };
+      return { ...state, orderVideogames: copy3 }
 
     default:
-      return { ...state };
+      return { ...state }
   }
 };
 
-export default rootReducer;
+export default rootReducer

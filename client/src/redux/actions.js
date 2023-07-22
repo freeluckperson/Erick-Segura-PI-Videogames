@@ -1,7 +1,7 @@
 import axios from 'axios'
-import { GET_ALLGAMES, FILTER_GENRES, FILTER_ORIGIN, ORDER, ALPHABETH,  GET_VIDEOGAME_BY_NAME } from './index';
+import { GET_ALLGAMES, FILTER_GENRES, FILTER_ORIGIN, ORDER, ALPHABETH,  GET_VIDEOGAME_BY_NAME } from './index'
 
-const URL = 'http://localhost:3001/videogames/';
+const URL = 'http://localhost:3001/videogames/'
 
 
 export const filterByGenres = (payload) => {
@@ -22,7 +22,7 @@ export const alphabetically = (payload) => {
 
 export const getGames = () => {
   return async (dispatch) => {
-    const { data } = await axios(URL);
+    const { data } = await axios(`${URL}`);
     dispatch({ type: GET_ALLGAMES, payload: data })
   }
 }

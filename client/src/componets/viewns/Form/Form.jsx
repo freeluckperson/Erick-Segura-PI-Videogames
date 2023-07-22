@@ -1,70 +1,71 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios"
-import styles from "./Form.module.css";
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
+import styles from './Form.module.css'
 
 
 const Form = () => {
   const [gameData, setGameData] = useState({
-    name: "",
-    released: "",
-    imag: "",
-    rating: "",
+    name: '',
+    released: '',
+    imag: '',
+    rating: '',
     platforms: [],
-    description: "",
+    description: '',
     genres: [],
   });
 
   const [errors, setErrors] = useState({});
-
+  
   const validate = () => {
-    const errors = {};
-     if (gameData.imag.includes('http')) {errors.imag = ""}else{errors.imag = "Imag required"}
-     if (gameData.released.length > 8) {errors.released = ""}else{errors.released = "released required"}
-     if (gameData.rating.length > 0) {errors.rating = ""}else{errors.rating = "rating required"}
-     if (gameData.name.length <= 15) {errors.name = ""}else{errors.name = "Max 15 characters"}
-     if (gameData.description.length <= 20) {errors.description = ""}else{errors.description = "Max 20 characters"}
-     if(gameData.genres.length > 0){errors.genres = ""} else {errors.genres = "The game must have at least one gender"}
-     if(gameData.platforms.length > 0) {errors.platforms = ""} else {errors.platforms = "the game must have at least one platform"}
-    return errors;
-  };
+    const errors = {}
+    const { released, rating, name, description, genres, platforms, imag } = gameData
+    errors.imag = imag && !/\.(jpg|jpeg|png|gif)$/.test(imag) ? 'Invalid image format ': ''
+    errors.released = released.length > 8 ? '' : 'released required'
+    errors.rating = rating.length > 0 ? '' : 'rating required'
+    errors.name = name.length <= 15 ? '' : 'Max 15 characters'
+    errors.description = description.length <= 20 ? '' : 'Max 20 characters'
+    errors.genres = genres.length > 0 ? '' : 'The game must have at least one gender'
+    errors.platforms = platforms.length > 0 ? '' : 'the game must have at least one platform'
+    return errors
+  }
 
   useEffect(() => {
-    setErrors(validate());
-  }, [gameData]);
+    setErrors(validate())
+  }, [gameData])
 
   const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setErrors(validate({ ...gameData, [name]: value }));
-    setGameData({ ...gameData, [name]: value });
-  };
+    const { name, value } = event.target
+    setErrors(validate({ ...gameData, [name]: value }))
+    setGameData({ ...gameData, [name]: value })
+  }
 
   const handlePlatformChange = (event) => {
     const selectedOptions = Array.from(
       event.target.selectedOptions,
       (option) => option.value
-    );
-    setGameData({ ...gameData, platforms: selectedOptions });
-  };
+    )
+    setGameData({ ...gameData, platforms: selectedOptions })
+  }
 
   const handleGenreChange = (event) => {
     const selectedOptions = Array.from(
       event.target.selectedOptions,
       (option) => option.value
-    );
-    setGameData({ ...gameData, genres: selectedOptions });
-  };
+    )
+    setGameData({ ...gameData, genres: selectedOptions })
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
     axios.post("http://localhost:3001/videogames/", gameData)
     .then(res=> alert(`${res} Game save in DB`))
     setGameData({
-      name: "",
-      released: "",
-      imag: "",
-      rating: "",
+      name: '',
+      released: '',
+      imag: '',
+      rating: '',
       platforms: [],
-      description: "",
+      description: '',
       genres: [],
     })
   };
@@ -74,7 +75,7 @@ const Form = () => {
       <h1>Crear Nuevo Videojuego</h1>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="name">Nombre:</label>
+          <label htmlFor="name">Name:</label>
           <input
             type="text"
             name="name"
@@ -236,4 +237,4 @@ const Form = () => {
   );
 }
 
-export default Form;
+export default Form
