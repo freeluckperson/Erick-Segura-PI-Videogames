@@ -79,7 +79,7 @@ const CardsContainer = ({games}) => {
           <option value="ALL">ALL</option>
         </select>
       </div>
-      <div style={{ marginTop: '1em' }}>
+      <div style={{marginTop: '1em'}}>
         <SearchBar setCurrentPage={setCurrentPage} />
       </div>
       <div className={styles.container}>
@@ -88,11 +88,9 @@ const CardsContainer = ({games}) => {
           <Card name={name} imag={imag} genres={genres} id={id} key={id} />
         ))}
       </div>
-      <div>
+      <div className={styles.buttonContainer}>
         {pageNumbers.map((number) => (
-          <button key={number} onClick={() => paginate(number)}>
-            {number}
-          </button>
+          <button type='button' key={number} onClick={() => paginate(number)} className={styles.button}>{number}</button>
         ))}
       </div>
     </div>

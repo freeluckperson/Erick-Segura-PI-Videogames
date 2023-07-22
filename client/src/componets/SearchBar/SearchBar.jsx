@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { getVideogameByName } from '../../redux/actions';
-import styles from './SearchBar.module.css';
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { getVideogameByName } from '../../redux/actions'
+import styles from './SearchBar.module.css'
 
 const SearchBar = ({setCurrentPage}) => {
-  const [name, setName] = useState('');
-  const [error, setError] = useState('');
-  const dispatch = useDispatch();
+  const [name, setName] = useState('')
+  const [error, setError] = useState('')
+  const dispatch = useDispatch()
 
   const handleInputChange = (e) => {
     e.preventDefault();
-    setName(e.target.value);
-  };
+    setName(e.target.value)
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
