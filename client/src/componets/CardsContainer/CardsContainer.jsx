@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import styles from './CardsContainer.module.css';
+import React, { useState } from 'react'
+import styles from './CardsContainer.module.css'
 import { Card } from '../';
-import { useDispatch } from 'react-redux';
-import { alphabetically, filterByGenres, filterByOrigin, orderByRating } from '../../redux/actions';
-import SearchBar from '../SearchBar/SearchBar';
+import { useDispatch } from 'react-redux'
+import { alphabetically, filterByGenres, filterByOrigin, orderByRating } from '../../redux/actions'
+import { SearchBar } from '../index';
 
 const CardsContainer = ({games}) => {
-  const st = { width: '80px', marginBottom: '4em', marginRight: '1em' };
+  const st = { width: '80px', marginBottom: '5em', marginRight: '1em' };
   const dispatch = useDispatch();
   
   const [currentPage, setCurrentPage] = useState(1);

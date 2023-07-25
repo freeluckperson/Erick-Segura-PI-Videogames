@@ -37,7 +37,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
           return 0
         }
       })
-      return { ...state, orderVideogames: copy2 }
+      return { ...state, orderVideogames: copy2, filterVideogames: copy2 }
 
     case ALPHABETH:
       let copy3 = state.videogames.sort((a, b) => {
@@ -48,7 +48,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
         }
       });
 
-      return { ...state, orderVideogames: copy3 }
+      return { ...state, orderVideogames: copy3, filterVideogames: copy3 }
 
     default:
       return { ...state }
